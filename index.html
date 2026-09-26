@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chess World | @coding.ratno</title>
+    <link rel="shortcut icon" href="chess.jpg">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- =========================================
+         HOME SCREEN
+    ========================================== -->
+
+    <div id="home-screen" class="screen active">
+
+        <div class="home-container">
+
+            <!-- Logo -->
+
+            <div class="chess-logo">
+                ♟
+            </div>
+
+            <h1>CHESS WORLD</h1>
+
+            <p class="welcome-text">
+                Welcome to the Ultimate Chess Experience
+            </p>
+
+
+            <!-- =================================
+                 MODE SELECTION
+            ================================== -->
+
+            <div id="mode-selection" class="setup-section">
+
+                <h2>Choose Your Mode</h2>
+
+                <div class="mode-options">
+
+                    <!-- PLAYER VS PLAYER -->
+
+                    <button
+                        type="button"
+                        class="mode-card"
+                        id="pvp-button"
+                        onclick="selectGameMode('pvp')"
+                    >
+
+                        <div class="mode-icon">
+                            👥
+                        </div>
+
+                        <div class="mode-title">
+                            Player vs Player
+                        </div>
+
+                        <div class="mode-description">
+                            Play against another player
+                        </div>
+
+                    </button>
+
+
+                    <!-- PLAYER VS COMPUTER -->
+
+                    <button
+                        type="button"
+                        class="mode-card"
+                        id="pvc-button"
+                        onclick="selectGameMode('pvc')"
+                    >
+
+                        <div class="mode-icon">
+                            🤖
+                        </div>
+
+                        <div class="mode-title">
+                            Player vs Computer
+                        </div>
+
+                        <div class="mode-description">
+                            Challenge the computer
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 PVP SETUP
+            ================================== -->
+
+            <div
+                id="pvp-setup"
+                class="setup-section hidden"
+            >
+
+                <button
+                    type="button"
+                    class="back-button"
+                    onclick="backToModeSelection()"
+                >
+                    ← Back
+                </button>
+
+
+                <h2>Choose Your Color</h2>
+
+                <p class="setup-description">
+                    Select the color for Player 1
+                </p>
+
+
+                <div class="color-options">
+
+                    <!-- WHITE -->
+
+                    <button
+                        type="button"
+                        class="color-card selected"
+                        id="white-choice"
+                        onclick="selectPlayerColor('w')"
+                    >
+
+                        <div class="color-piece white-piece">
+                            ♔
+                        </div>
+
+                        <div class="color-name">
+                            White
+                        </div>
+
+                        <div class="color-info">
+                            Moves First
+                        </div>
+
+                    </button>
+
+
+                    <!-- BLACK -->
+
+                    <button
+                        type="button"
+                        class="color-card"
+                        id="black-choice"
+                        onclick="selectPlayerColor('b')"
+                    >
+
+                        <div class="color-piece black-piece">
+                            ♚
+                        </div>
+
+                        <div class="color-name">
+                            Black
+                        </div>
+
+                        <div class="color-info">
+                            White moves first
+                        </div>
+
+                    </button>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="start-button"
+                    onclick="startGame('pvp')"
+                >
+
+                    START GAME
+
+                    <span>→</span>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================
+                 PVC SETUP
+            ================================== -->
+
+            <div
+                id="pvc-setup"
+                class="setup-section hidden"
+            >
+
+                <button
+                    type="button"
+                    class="back-button"
+                    onclick="backToModeSelection()"
+                >
+                    ← Back
+                </button>
+
+
+                <!-- =================================
+                     COLOR SELECTION
+                ================================== -->
+
+                <div class="pvc-color-section">
+
+                    <h2>Choose Your Color</h2>
+
+                    <p class="setup-description">
+                        Select your color
+                    </p>
+
+
+                    <div class="color-options">
+
+                        <!-- WHITE -->
+
+                        <button
+                            type="button"
+                            class="color-card selected"
+                            id="pvc-white-choice"
+                            onclick="selectPvCColor('w')"
+                        >
+
+                            <div class="color-piece white-piece">
+                                ♔
+                            </div>
+
+                            <div class="color-name">
+                                White
+                            </div>
+
+                            <div class="color-info">
+                                You move first
+                            </div>
+
+                        </button>
+
+
+                        <!-- BLACK -->
+
+                        <button
+                            type="button"
+                            class="color-card"
+                            id="pvc-black-choice"
+                            onclick="selectPvCColor('b')"
+                        >
+
+                            <div class="color-piece black-piece">
+                                ♚
+                            </div>
+
+                            <div class="color-name">
+                                Black
+                            </div>
+
+                            <div class="color-info">
+                                Computer moves first
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     DIFFICULTY SELECTION
+                ================================== -->
+
+                <div class="pvc-difficulty-section">
+
+                    <h2>Choose Difficulty</h2>
+
+                    <p class="setup-description">
+                        Select the computer difficulty
+                    </p>
+
+
+                    <div class="difficulty-options">
+
+                        <!-- LEVEL 1 -->
+
+                        <button
+                            type="button"
+                            class="difficulty-card selected"
+                            id="difficulty-1"
+                            onclick="selectDifficulty(1)"
+                        >
+
+                            <div class="difficulty-number">
+                                1
+                            </div>
+
+                            <div class="difficulty-content">
+
+                                <div class="difficulty-title">
+                                    Beginner
+                                </div>
+
+                                <div class="difficulty-description">
+                                    Perfect for new players
+                                </div>
+
+                            </div>
+
+                        </button>
+
+
+                        <!-- LEVEL 2 -->
+
+                        <button
+                            type="button"
+                            class="difficulty-card"
+                            id="difficulty-2"
+                            onclick="selectDifficulty(2)"
+                        >
+
+                            <div class="difficulty-number">
+                                2
+                            </div>
+
+                            <div class="difficulty-content">
+
+                                <div class="difficulty-title">
+                                    Easy
+                                </div>
+
+                                <div class="difficulty-description">
+                                    A relaxed challenge
+                                </div>
+
+                            </div>
+
+                        </button>
+
+
+                        <!-- LEVEL 3 -->
+
+                        <button
+                            type="button"
+                            class="difficulty-card"
+                            id="difficulty-3"
+                            onclick="selectDifficulty(3)"
+                        >
+
+                            <div class="difficulty-number">
+                                3
+                            </div>
+
+                            <div class="difficulty-content">
+
+                                <div class="difficulty-title">
+                                    Medium
+                                </div>
+
+                                <div class="difficulty-description">
+                                    A balanced challenge
+                                </div>
+
+                            </div>
+
+                        </button>
+
+
+                        <!-- LEVEL 4 -->
+
+                        <button
+                            type="button"
+                            class="difficulty-card"
+                            id="difficulty-4"
+                            onclick="selectDifficulty(4)"
+                        >
+
+                            <div class="difficulty-number">
+                                4
+                            </div>
+
+                            <div class="difficulty-content">
+
+                                <div class="difficulty-title">
+                                    Hard
+                                </div>
+
+                                <div class="difficulty-description">
+                                    For experienced players
+                                </div>
+
+                            </div>
+
+                        </button>
+
+
+                        <!-- LEVEL 5 -->
+
+                        <button
+                            type="button"
+                            class="difficulty-card"
+                            id="difficulty-5"
+                            onclick="selectDifficulty(5)"
+                        >
+
+                            <div class="difficulty-number">
+                                5
+                            </div>
+
+                            <div class="difficulty-content">
+
+                                <div class="difficulty-title">
+                                    Expert
+                                </div>
+
+                                <div class="difficulty-description">
+                                    Maximum challenge
+                                </div>
+
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     START GAME
+                ================================== -->
+
+                <button
+                    type="button"
+                    class="start-button"
+                    onclick="startGame('pvc')"
+                >
+
+                    START GAME
+
+                    <span>→</span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         CHESS GAME SCREEN
+    ========================================== -->
+
+    <div
+        id="game-screen"
+        class="screen hidden"
+    >
+
+        <div class="game-container">
+
+            <h1>♟️ Chess WORLD</h1>
+
+            <!-- Chess Board -->
+
+            <div id="chess-board"></div>
+
+
+            <!-- =================================
+                 GAME CONTROLS
+            ================================== -->
+
+            <div class="game-controls">
+
+                <button
+                    type="button"
+                    class="play-again-button"
+                    onclick="restartGame()"
+                >
+                    🔄 Play Again
+                </button>
+
+                <button
+                    type="button"
+                    class="home-button"
+                    onclick="returnToHome()"
+                >
+                    🏠 Back to Home
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         GAME OVER CELEBRATION
+    ========================================== -->
+
+    <div
+        id="game-over-overlay"
+        class="game-over-overlay hidden"
+    >
+
+        <div class="game-over-card">
+
+            <!-- Celebration Icon -->
+
+            <div
+                id="game-over-icon"
+                class="game-over-icon"
+            >
+                🎉
+            </div>
+
+
+            <!-- Result Title -->
+
+            <h2 id="game-over-title">
+                White Wins!
+            </h2>
+
+
+            <!-- Result Message -->
+
+            <p id="game-over-message">
+                Congratulations!
+            </p>
+
+
+            <!-- Celebration Animation -->
+
+            <div
+                id="celebration-animation"
+                class="celebration-animation"
+            >
+                ✨ ✨ ✨
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="game-over-buttons">
+
+                <button
+                    type="button"
+                    class="play-again-button"
+                    onclick="restartGame()"
+                >
+                    🔄 Play Again
+                </button>
+
+                <button
+                    type="button"
+                    class="home-button"
+                    onclick="returnToHome()"
+                >
+                    🏠 Back to Home
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         CHESS.JS
+    ========================================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+
+    <!-- =========================================
+         MAIN JAVASCRIPT
+    ========================================== -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
